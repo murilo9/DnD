@@ -19,6 +19,7 @@ public abstract class Personagem {
     
     public static Personagem testResist(Personagem per1, Personagem per2){
         //TODO
+        return null;
     }
     
     /**
@@ -28,6 +29,7 @@ public abstract class Personagem {
      */
     public static int getDmgMin(Personagem per){
         //TODO
+        return 0;
     }
     
     /**
@@ -37,6 +39,7 @@ public abstract class Personagem {
      */
     public static int getDmgMax(Personagem per){
         //TODO
+        return 0;
     }
     
     public abstract int getHpMax(Personagem per);

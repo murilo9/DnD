@@ -731,12 +731,12 @@ public class prototipoJanela extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu5.setText("Inserir");
+        jMenu5.setText("Personagens");
 
-        jMenuItem18.setText("Novo");
+        jMenuItem18.setText("Inserir Jogador");
         jMenu5.add(jMenuItem18);
 
-        jMenuItem19.setText("Deletar");
+        jMenuItem19.setText("Inserir NPC");
         jMenu5.add(jMenuItem19);
 
         jMenuBar1.add(jMenu5);

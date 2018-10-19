@@ -16,9 +16,11 @@ public class Jogador {
     
     public boolean equip(){
         //TODO
+        return false;
     }
     
     public boolean unequip(){
         //TODO
+        return false;
     }
 }

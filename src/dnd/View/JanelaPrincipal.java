@@ -5,6 +5,9 @@
  */
 package dnd.View;
 
+import dnd.DND;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Murilo
@@ -16,6 +19,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
      */
     public JanelaPrincipal() {
         initComponents();
+        this.setVisible(true);
     }
 
     /**
@@ -68,17 +72,20 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        menuArquivoNovaPartida = new javax.swing.JMenuItem();
+        menuArquivoCarregarPartida = new javax.swing.JMenuItem();
+        menuArquivoSalvarPartida = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem5 = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        menuArquivoSair = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Dungeons & Dragons");
+        setResizable(false);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Jogador"));
 
@@ -191,9 +198,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,7 +277,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -381,29 +386,53 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Arquivo");
 
-        jMenuItem1.setText("Nova Partida");
-        jMenu1.add(jMenuItem1);
+        menuArquivoNovaPartida.setText("Nova Partida");
+        menuArquivoNovaPartida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuArquivoNovaPartidaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuArquivoNovaPartida);
 
-        jMenuItem2.setText("Carregar Partida");
-        jMenu1.add(jMenuItem2);
+        menuArquivoCarregarPartida.setText("Carregar Partida");
+        jMenu1.add(menuArquivoCarregarPartida);
 
-        jMenuItem3.setText("Salvar Partida");
-        jMenu1.add(jMenuItem3);
-
-        jMenuItem4.setText("Abandonar Partida");
-        jMenu1.add(jMenuItem4);
+        menuArquivoSalvarPartida.setText("Salvar Partida");
+        menuArquivoSalvarPartida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuArquivoSalvarPartidaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuArquivoSalvarPartida);
         jMenu1.add(jSeparator1);
 
         jMenuItem5.setText("Gerenciar Bases de Dados");
         jMenu1.add(jMenuItem5);
         jMenu1.add(jSeparator2);
 
-        jMenuItem6.setText("Sair");
-        jMenu1.add(jMenuItem6);
+        menuArquivoSair.setText("Sair");
+        menuArquivoSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuArquivoSairActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuArquivoSair);
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Personagens");
+
+        jMenuItem1.setText("Inserir Jogador");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
+
+        jMenuItem2.setText("Remover Jogador");
+        jMenu2.add(jMenuItem2);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -423,6 +452,27 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void menuArquivoNovaPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuArquivoNovaPartidaActionPerformed
+        if(JOptionPane.showConfirmDialog(null, "Deseja abandonar esta partida e iniciar uma nova?") == 0){
+            DND.novaPartida();      //Cria uma nova instância vazia de partida
+        }
+    }//GEN-LAST:event_menuArquivoNovaPartidaActionPerformed
+
+    private void menuArquivoSalvarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuArquivoSalvarPartidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuArquivoSalvarPartidaActionPerformed
+
+    private void menuArquivoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuArquivoSairActionPerformed
+        if(JOptionPane.showConfirmDialog(null, "Deseja mesmo sair sem salvar?") == 0){
+            System.exit(0);
+        }
+    }//GEN-LAST:event_menuArquivoSairActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        this.setEnabled(false);
+        JanelaCriaJogador janelaCriaJogador = new JanelaCriaJogador(this, false);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -479,10 +529,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -510,5 +557,9 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel labelRaca;
     private javax.swing.JLabel labelStr;
     private javax.swing.JLabel labelWis;
+    private javax.swing.JMenuItem menuArquivoCarregarPartida;
+    private javax.swing.JMenuItem menuArquivoNovaPartida;
+    private javax.swing.JMenuItem menuArquivoSair;
+    private javax.swing.JMenuItem menuArquivoSalvarPartida;
     // End of variables declaration//GEN-END:variables
 }
