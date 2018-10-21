@@ -1,16 +1,24 @@
 package dnd;
 
-import dnd.Model.Jogador;
-import java.util.List;
+import dnd.Model.*;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
  * @author Murilo
  */
 public class Partida {
-    public List<Jogador> listaJogadores;
+    DefaultComboBoxModel jogadores;
     
     public Partida(){
-        
+        jogadores = new DefaultComboBoxModel();
+    }
+    
+    public void addJogador(Jogador jogador){
+        jogadores.addElement(jogador);
+    }
+    
+    public DefaultComboBoxModel getListaJogadores(){
+        return this.jogadores;
     }
 }

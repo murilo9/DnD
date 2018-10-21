@@ -1,12 +1,39 @@
 package dnd.Model;
 
 import java.util.Map;
+import javax.swing.DefaultListModel;
 
 public abstract class Personagem {
-    public int str, con, dex, itl, wis, cha, level;
+    public int str, con, dex, itl, wis, cha, hp;
     public String nome;
     Raca raca;
-    public Map<Pericia,Integer> pericias;   //Mapa de perícias (par perícia-valor), instanciado no construtor
+    public DefaultListModel pericias;   //Mapa de perícias (par perícia-valor), instanciado no construtor
+    
+    /**
+     * Este construtor não faz tratamento de dados!
+     * @param INnome
+     * @param INraca
+     * @param INpericias
+     * @param INstr
+     * @param INcon
+     * @param INdex
+     * @param INitl
+     * @param INwis
+     * @param INcha
+     */
+    public Personagem(String INnome, Raca INraca, DefaultListModel INpericias,
+            int INstr, int INcon, int INdex, int INitl, int INwis, int INcha){    //Construtor da classe
+        this.nome = INnome;
+        this.raca = INraca;
+        this.str = INstr;
+        this.con = INcon;
+        this.dex = INdex;
+        this.itl = INitl;
+        this.wis = INwis;
+        this.cha = INcha;
+        this.pericias = new DefaultListModel();
+        this.pericias = INpericias;
+    }
     
     /**
      * Retorna o modificador de um atributo.
@@ -42,7 +69,7 @@ public abstract class Personagem {
         return 0;
     }
     
-    public abstract int getHpMax(Personagem per);
+    public abstract int getHpMax();
     
     public abstract boolean tryAtack(Personagem alvo);     //Método abstrato a ser implementado pelas sub-classes
 }
