@@ -7,6 +7,7 @@ package dnd.View;
 
 import dnd.DND;
 import dnd.Controller.Controller;
+import dnd.Model.Jogador;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,9 +23,12 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
     }
-
-    public boolean refresh(){
+    
+    public void refreshComboBoxJogadores(){
         comboBoxJogadores.setModel(DND.partida.getListaJogadores());   //Atualiza lista de jogadores
+    }
+    
+    public boolean refreshView(){
         if(DND.partida.getListaJogadores().getSize() == 0){     //Reseta a View
             labelStr.setText("-----");
             labelCon.setText("-----");
@@ -32,6 +36,10 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             labelItl.setText("-----");
             labelWis.setText("-----");
             labelCha.setText("-----");
+            labelDescri.setText("-----");
+            labelHP.setText("-/-");
+            labelRaca.setText("-----");
+            labelLevel.setText("-----");
         }else{      //Exibe os dados do jogador selecionado
             int playerIndex = comboBoxJogadores.getSelectedIndex();
             //Atualiza as labels de atributos:
@@ -41,6 +49,16 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             labelItl.setText(Controller.getLabel(playerIndex,"itl"));
             labelWis.setText(Controller.getLabel(playerIndex,"wis"));
             labelCha.setText(Controller.getLabel(playerIndex,"cha"));
+            labelDescri.setText(Controller.getLabel(playerIndex, "descri"));
+            labelHP.setText(Controller.getLabel(playerIndex,"hp"));
+            labelRaca.setText(Controller.getLabel(playerIndex, "raca"));
+            labelLevel.setText("Level "+Controller.getLabel(playerIndex, "level"));
+            labelHPDices.setText(Controller.getLabel(playerIndex, "hpDices"));
+            labelAC.setText(Controller.getLabel(playerIndex, "AC"));
+            labelDP.setText(Controller.getLabel(playerIndex, "dmgPot"));
+            labelClasse.setText(Controller.getLabel(playerIndex, "classes"));
+            Jogador jogador = (Jogador)comboBoxJogadores.getSelectedItem();
+            listaPericias.setModel(jogador.pericias);
         }
         //TODO: atualiza os dados exibidos por esta janela
         return true;
@@ -77,10 +95,10 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         labelWis = new javax.swing.JLabel();
         labelCha = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        labelDescri = new javax.swing.JTextArea();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        listaPericias = new javax.swing.JList<>();
         jPanel7 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -111,6 +129,12 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         setResizable(false);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Jogador"));
+
+        comboBoxJogadores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxJogadoresActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("HP:");
 
@@ -209,13 +233,13 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        labelDescri.setColumns(20);
+        labelDescri.setRows(5);
+        jScrollPane1.setViewportView(labelDescri);
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Perícias"));
 
-        jScrollPane3.setViewportView(jList2);
+        jScrollPane3.setViewportView(listaPericias);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -365,14 +389,13 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelHP, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelHP, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(labelRaca)
                         .addGap(18, 18, 18)
                         .addComponent(labelLevel)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jButton2)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -507,10 +530,15 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             int jogadorSelec = comboBoxJogadores.getSelectedIndex();
             if(JOptionPane.showConfirmDialog(null, "Deseja remover o jogador selecionado?") == 0){
                 DND.partida.removeJogador(jogadorSelec);    //Remove o jogador
-                refresh();//Atualiza a view
+                refreshComboBoxJogadores();     //Atualiza a comboBox de jogadores, ja que ela foi modificada
+                refreshView();      //Atualiza a view
             }
         }
     }//GEN-LAST:event_menuPersonRemoveJogadorActionPerformed
+
+    private void comboBoxJogadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxJogadoresActionPerformed
+        refreshView();
+    }//GEN-LAST:event_comboBoxJogadoresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -561,7 +589,6 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -579,12 +606,12 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel labelAC;
     private javax.swing.JLabel labelCha;
     private javax.swing.JLabel labelClasse;
     private javax.swing.JLabel labelCon;
     private javax.swing.JLabel labelDP;
+    private javax.swing.JTextArea labelDescri;
     private javax.swing.JLabel labelDex;
     private javax.swing.JLabel labelHP;
     private javax.swing.JLabel labelHPDices;
@@ -593,6 +620,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel labelRaca;
     private javax.swing.JLabel labelStr;
     private javax.swing.JLabel labelWis;
+    private javax.swing.JList<String> listaPericias;
     private javax.swing.JMenuItem menuArquivoCarregarPartida;
     private javax.swing.JMenuItem menuArquivoNovaPartida;
     private javax.swing.JMenuItem menuArquivoSair;

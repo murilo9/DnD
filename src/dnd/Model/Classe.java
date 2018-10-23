@@ -1,28 +1,27 @@
 package dnd.Model;
 
 public class Classe {
-    EnumClasse tipo;
-    int level;
-    int hitDiceSize;
+    public EnumClasse tipo;
+    public int level, hpDiceSize;
     
     public Classe(EnumClasse INtipo, int INlevel){
         this.tipo = INtipo;
         this.level = INlevel;
         switch(INtipo){
             case BARBARIAN:
-                this.hitDiceSize = 12;
+                this.hpDiceSize = 12;
                 break;
             case WARRIOR:
-                this.hitDiceSize = 10;
+                this.hpDiceSize = 10;
                 break;
             case RANGER:
-                this.hitDiceSize = 8;
+                this.hpDiceSize = 8;
                 break;
             case CLERIC:
-                this.hitDiceSize = 8;
+                this.hpDiceSize = 8;
                 break;
             case WIZARD:
-                this.hitDiceSize = 6;
+                this.hpDiceSize = 6;
                 break;
         }
     }

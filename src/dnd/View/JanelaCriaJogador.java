@@ -410,7 +410,8 @@ public class JanelaCriaJogador extends javax.swing.JDialog {
         boolean result = Controller.tryCriaJogador(nome, descri, raca, classe, align, genero,
                                                     str, con, dex, itl, wis, cha, pericias);
         if(result){     //Se o jogador foi criado com sucesso
-            DND.janelaPrincipal.refresh();      //Atualiza os dados da janela principal
+            DND.janelaPrincipal.refreshComboBoxJogadores();
+            DND.janelaPrincipal.refreshView();      //Atualiza os dados da janela principal
             DND.janelaPrincipal.setEnabled(true);   //Reativa a janela principal
             dispose();
         }else

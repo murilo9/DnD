@@ -41,6 +41,22 @@ public abstract class Controller {
                 atribute = Integer.toString(jogador.cha);
                 mod = Integer.toString(Personagem.getMod(jogador.cha));
                 return atribute+" ("+mod+")";
+            case "descri":
+                return jogador.descricao;
+            case "raca":
+                return jogador.getRacaString();
+            case "level":
+                return Integer.toString(jogador.getLevel());
+            case "hp":
+                return Integer.toString(jogador.hp)+"/"+Integer.toString(jogador.getHpMax());
+            case "hpDices":
+                return jogador.getHpDicesString();
+            case "AC":
+                return Integer.toString(jogador.getAC());
+            case "dmgPot":
+                return jogador.getDmgPotString();
+            case "classes":
+                return jogador.getClassesString();
             //TODO resto
             default:
                 return "null..";

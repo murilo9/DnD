@@ -1,6 +1,5 @@
 package dnd.Model;
 
-import java.util.Map;
 import javax.swing.DefaultListModel;
 
 public abstract class Personagem {
@@ -21,7 +20,7 @@ public abstract class Personagem {
      * @param INwis
      * @param INcha
      */
-    public Personagem(String INnome, Raca INraca, DefaultListModel INpericias,
+    public Personagem(String INnome, Raca INraca,
             int INstr, int INcon, int INdex, int INitl, int INwis, int INcha){    //Construtor da classe
         this.nome = INnome;
         this.raca = INraca;
@@ -31,8 +30,6 @@ public abstract class Personagem {
         this.itl = INitl;
         this.wis = INwis;
         this.cha = INcha;
-        this.pericias = new DefaultListModel();
-        this.pericias = INpericias;
     }
     
     /**
@@ -54,22 +51,16 @@ public abstract class Personagem {
      * @param per
      * @return 
      */
-    public static int getDmgMin(Personagem per){
-        //TODO
-        return 0;
-    }
+    public abstract int dieRoll();
     
-    /**
-     * Retorna o dano potencial máximo do personagem
-     * @param per
-     * @return 
-     */
-    public static int getDmgMax(Personagem per){
+    public String getRacaString(){
         //TODO
-        return 0;
+        return "";
     }
     
     public abstract int getHpMax();
+    
+    public abstract int getAC();
     
     public abstract boolean tryAtack(Personagem alvo);     //Método abstrato a ser implementado pelas sub-classes
 }
