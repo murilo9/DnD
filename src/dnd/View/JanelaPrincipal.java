@@ -6,6 +6,7 @@
 package dnd.View;
 
 import dnd.DND;
+import dnd.Controller.Controller;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,9 +23,27 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         this.setVisible(true);
     }
 
-    public void refresh(){
-        this.comboBoxJogadores.setModel(DND.partida.getListaJogadores());   //Atualiza lista de jogadores
+    public boolean refresh(){
+        comboBoxJogadores.setModel(DND.partida.getListaJogadores());   //Atualiza lista de jogadores
+        if(DND.partida.getListaJogadores().getSize() == 0){     //Reseta a View
+            labelStr.setText("-----");
+            labelCon.setText("-----");
+            labelDex.setText("-----");
+            labelItl.setText("-----");
+            labelWis.setText("-----");
+            labelCha.setText("-----");
+        }else{      //Exibe os dados do jogador selecionado
+            int playerIndex = comboBoxJogadores.getSelectedIndex();
+            //Atualiza as labels de atributos:
+            labelStr.setText(Controller.getLabel(playerIndex,"str"));
+            labelCon.setText(Controller.getLabel(playerIndex,"con"));
+            labelDex.setText(Controller.getLabel(playerIndex,"dex"));
+            labelItl.setText(Controller.getLabel(playerIndex,"itl"));
+            labelWis.setText(Controller.getLabel(playerIndex,"wis"));
+            labelCha.setText(Controller.getLabel(playerIndex,"cha"));
+        }
         //TODO: atualiza os dados exibidos por esta janela
+        return true;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,8 +103,8 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         menuArquivoSair = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        menuPersonAddJogador = new javax.swing.JMenuItem();
+        menuPersonRemoveJogador = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dungeons & Dragons");
@@ -426,16 +445,21 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         jMenu2.setText("Personagens");
 
-        jMenuItem1.setText("Inserir Jogador");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menuPersonAddJogador.setText("Inserir Jogador");
+        menuPersonAddJogador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                menuPersonAddJogadorActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
+        jMenu2.add(menuPersonAddJogador);
 
-        jMenuItem2.setText("Remover Jogador");
-        jMenu2.add(jMenuItem2);
+        menuPersonRemoveJogador.setText("Remover Jogador");
+        menuPersonRemoveJogador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuPersonRemoveJogadorActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuPersonRemoveJogador);
 
         jMenuBar1.add(jMenu2);
 
@@ -473,10 +497,20 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_menuArquivoSairActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void menuPersonAddJogadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPersonAddJogadorActionPerformed
         //this.setEnabled(false);
         JanelaCriaJogador janelaCriaJogador = new JanelaCriaJogador(this, false);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_menuPersonAddJogadorActionPerformed
+
+    private void menuPersonRemoveJogadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPersonRemoveJogadorActionPerformed
+        if(DND.partida.getListaJogadores().getSize() > 0){
+            int jogadorSelec = comboBoxJogadores.getSelectedIndex();
+            if(JOptionPane.showConfirmDialog(null, "Deseja remover o jogador selecionado?") == 0){
+                DND.partida.removeJogador(jogadorSelec);    //Remove o jogador
+                refresh();//Atualiza a view
+            }
+        }
+    }//GEN-LAST:event_menuPersonRemoveJogadorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -531,8 +565,6 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -565,5 +597,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuArquivoNovaPartida;
     private javax.swing.JMenuItem menuArquivoSair;
     private javax.swing.JMenuItem menuArquivoSalvarPartida;
+    private javax.swing.JMenuItem menuPersonAddJogador;
+    private javax.swing.JMenuItem menuPersonRemoveJogador;
     // End of variables declaration//GEN-END:variables
 }

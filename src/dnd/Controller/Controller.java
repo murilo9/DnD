@@ -7,6 +7,46 @@ import javax.swing.DefaultListModel;
 public abstract class Controller {
     public static String errorMessage;
     
+    /**
+     * Retorna a string que possui os dados a serem exibidos na view para o valor indicado
+     * @param playerIndex índice do jogador na DND.partida.jogadores ListModel
+     * @param value string indicando a View label cuja string se deseja obter
+     * @return 
+     */
+    public static String getLabel(int playerIndex, String value){
+        Jogador jogador = (Jogador)DND.partida.jogadores.getElementAt(playerIndex);
+        String atribute, mod;
+        switch(value){
+            case "str":
+                atribute = Integer.toString(jogador.str);
+                mod = Integer.toString(Personagem.getMod(jogador.str));
+                return atribute+" ("+mod+")";
+            case "con":
+                atribute = Integer.toString(jogador.con);
+                mod = Integer.toString(Personagem.getMod(jogador.con));
+                return atribute+" ("+mod+")";
+            case "dex":
+                atribute = Integer.toString(jogador.dex);
+                mod = Integer.toString(Personagem.getMod(jogador.dex));
+                return atribute+" ("+mod+")";
+            case "itl":
+                atribute = Integer.toString(jogador.itl);
+                mod = Integer.toString(Personagem.getMod(jogador.itl));
+                return atribute+" ("+mod+")";
+            case "wis":
+                atribute = Integer.toString(jogador.wis);
+                mod = Integer.toString(Personagem.getMod(jogador.wis));
+                return atribute+" ("+mod+")";
+            case "cha":
+                atribute = Integer.toString(jogador.cha);
+                mod = Integer.toString(Personagem.getMod(jogador.cha));
+                return atribute+" ("+mod+")";
+            //TODO resto
+            default:
+                return "null..";
+        }
+    }
+    
     public static boolean tryCriaJogador(String INnome, String INdescri, String INraca,
             String INclasse, String INalign, String INgenero, String INstr, String INcon,
             String INdex, String INitl, String INwis, String INcha, DefaultListModel INpericias){

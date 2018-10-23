@@ -8,7 +8,7 @@ import javax.swing.DefaultComboBoxModel;
  * @author Murilo
  */
 public class Partida {
-    DefaultComboBoxModel jogadores;
+    public DefaultComboBoxModel jogadores;
     
     public Partida(){
         jogadores = new DefaultComboBoxModel();
@@ -16,6 +16,10 @@ public class Partida {
     
     public void addJogador(Jogador jogador){
         jogadores.addElement(jogador);
+    }
+    
+    public void removeJogador(int index){
+            jogadores.removeElementAt(index);
     }
     
     public DefaultComboBoxModel getListaJogadores(){

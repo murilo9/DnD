@@ -97,7 +97,7 @@ public class JanelaCriaJogador extends javax.swing.JDialog {
 
         jLabel2.setText("Raça");
 
-        inputClasse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bárbaro(a)", "Guerreiro(a)", "Ladino(a)", "Mago/Bruxa", "Clérigo(a)", " " }));
+        inputClasse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bárbaro(a)", "Guerreiro(a)", "Ladino(a)", "Mago/Bruxa", "Clérigo(a)" }));
 
         inputRaca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Humano", "Anão", "Elfo", "Meio-orc" }));
 
