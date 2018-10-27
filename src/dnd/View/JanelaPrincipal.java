@@ -8,6 +8,8 @@ package dnd.View;
 import dnd.DND;
 import dnd.Controller.Controller;
 import dnd.Model.Jogador;
+import dnd.Model.Npc;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,6 +24,10 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     public JanelaPrincipal() {
         initComponents();
         this.setVisible(true);
+    }
+    
+    public void refreshListaNPCs(){
+        listaNPC.setModel(DND.partida.getListaNPCs());
     }
     
     public void refreshComboBoxJogadores(){
@@ -40,29 +46,52 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             labelHP.setText("-/-");
             labelRaca.setText("-----");
             labelLevel.setText("-----");
-        }else{      //Exibe os dados do jogador selecionado
+        }else{      //Exibe os dados do jogador e NPC selecionado
             int playerIndex = comboBoxJogadores.getSelectedIndex();
-            //Atualiza as labels de atributos:
-            labelStr.setText(Controller.getLabel(playerIndex,"str"));
-            labelCon.setText(Controller.getLabel(playerIndex,"con"));
-            labelDex.setText(Controller.getLabel(playerIndex,"dex"));
-            labelItl.setText(Controller.getLabel(playerIndex,"itl"));
-            labelWis.setText(Controller.getLabel(playerIndex,"wis"));
-            labelCha.setText(Controller.getLabel(playerIndex,"cha"));
-            labelDescri.setText(Controller.getLabel(playerIndex, "descri"));
-            labelHP.setText(Controller.getLabel(playerIndex,"hp"));
-            labelRaca.setText(Controller.getLabel(playerIndex, "raca"));
-            labelLevel.setText("Level "+Controller.getLabel(playerIndex, "level"));
-            labelHPDices.setText(Controller.getLabel(playerIndex, "hpDices"));
-            labelAC.setText(Controller.getLabel(playerIndex, "AC"));
-            labelDP.setText(Controller.getLabel(playerIndex, "dmgPot"));
-            labelClasse.setText(Controller.getLabel(playerIndex, "classes"));
+            //Atualiza as labels do Jogador:
+            labelStr.setText(Controller.getLabel(playerIndex,"str","jogador"));
+            labelCon.setText(Controller.getLabel(playerIndex,"con","jogador"));
+            labelDex.setText(Controller.getLabel(playerIndex,"dex","jogador"));
+            labelItl.setText(Controller.getLabel(playerIndex,"itl","jogador"));
+            labelWis.setText(Controller.getLabel(playerIndex,"wis","jogador"));
+            labelCha.setText(Controller.getLabel(playerIndex,"cha","jogador"));
+            labelDescri.setText(Controller.getLabel(playerIndex, "descri","jogador"));
+            labelHP.setText(Controller.getLabel(playerIndex,"hp","jogador"));
+            labelRaca.setText(Controller.getLabel(playerIndex, "raca","jogador"));
+            labelLevel.setText("Level "+Controller.getLabel(playerIndex, "level","jogador"));
+            labelHPDices.setText(Controller.getLabel(playerIndex, "hpDices","jogador"));
+            labelAC.setText(Controller.getLabel(playerIndex, "AC","jogador"));
+            labelDP.setText(Controller.getLabel(playerIndex, "dmgPot","jogador"));
+            labelClasse.setText(Controller.getLabel(playerIndex, "classes","jogador"));
             Jogador jogador = (Jogador)comboBoxJogadores.getSelectedItem();
-            listaPericias.setModel(jogador.pericias);
+            listaPericiasJogador.setModel(jogador.pericias);
+            
+        }
+        if(DND.partida.getListaNPCs().getSize() > 0){   //Se houver NPCs instanciados
+            //atualiza as labels do NPC:
+            int npcIndex = listaNPC.getSelectedIndex();
+            labelStrN.setText(Controller.getLabel(npcIndex,"str","npc"));
+            labelConN.setText(Controller.getLabel(npcIndex,"con","npc"));
+            labelDexN.setText(Controller.getLabel(npcIndex,"dex","npc"));
+            labelItlN.setText(Controller.getLabel(npcIndex,"itl","npc"));
+            labelWisN.setText(Controller.getLabel(npcIndex,"wis","npc"));
+            labelChaN.setText(Controller.getLabel(npcIndex,"cha","npc"));
+            Npc npc = (Npc)DND.partida.npcs.getElementAt(npcIndex);
+            listaPericiasNPC.setModel(npc.pericias);
+        }else{      //Caso contrário
+            //Reseta as labesd de NPC:
+            labelStrN.setText("-----");
+            labelConN.setText("-----");
+            labelDexN.setText("-----");
+            labelItlN.setText("-----");
+            labelWisN.setText("-----");
+            labelChaN.setText("-----");
+            listaPericiasNPC.setModel(new DefaultListModel());
         }
         //TODO: atualiza os dados exibidos por esta janela
         return true;
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -98,7 +127,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         labelDescri = new javax.swing.JTextArea();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        listaPericias = new javax.swing.JList<>();
+        listaPericiasJogador = new javax.swing.JList<>();
         jPanel7 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -111,6 +140,25 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
+        jPanel9 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listaNPC = new javax.swing.JList<>();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        labelStrN = new javax.swing.JLabel();
+        labelConN = new javax.swing.JLabel();
+        labelDexN = new javax.swing.JLabel();
+        labelItlN = new javax.swing.JLabel();
+        labelWisN = new javax.swing.JLabel();
+        labelChaN = new javax.swing.JLabel();
+        jPanel11 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        listaPericiasNPC = new javax.swing.JList<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuArquivoNovaPartida = new javax.swing.JMenuItem();
@@ -123,6 +171,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         menuPersonAddJogador = new javax.swing.JMenuItem();
         menuPersonRemoveJogador = new javax.swing.JMenuItem();
+        menuPersonAddNPC = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dungeons & Dragons");
@@ -239,7 +288,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Perícias"));
 
-        jScrollPane3.setViewportView(listaPericias);
+        jScrollPane3.setViewportView(listaPericiasJogador);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -250,7 +299,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -314,7 +363,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(labelClasse))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -339,10 +388,10 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane1)
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -356,7 +405,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 296, Short.MAX_VALUE)
+            .addGap(0, 332, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Inventário", jPanel4);
@@ -369,12 +418,17 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 296, Short.MAX_VALUE)
+            .addGap(0, 332, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Magias", jPanel5);
 
         jButton2.setText("Ação");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -409,8 +463,146 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                     .addComponent(labelLevel)
                     .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
+        );
+
+        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("NPC"));
+
+        listaNPC.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listaNPCValueChanged(evt);
+            }
+        });
+        jScrollPane2.setViewportView(listaNPC);
+
+        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Atributos"));
+
+        jLabel23.setText("Força");
+
+        jLabel24.setText("Constituição");
+
+        jLabel25.setText("Destreza");
+
+        jLabel26.setText("Inteligência");
+
+        jLabel27.setText("Conhecimento");
+
+        jLabel33.setText("Carisma");
+
+        labelStrN.setText("------");
+
+        labelConN.setText("------");
+
+        labelDexN.setText("------");
+
+        labelItlN.setText("------");
+
+        labelWisN.setText("------");
+
+        labelChaN.setText("------");
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jLabel23)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labelStrN))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jLabel33)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labelChaN))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jLabel24)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labelConN))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jLabel25)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labelDexN))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jLabel26)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labelItlN))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jLabel27)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                        .addComponent(labelWisN)))
+                .addContainerGap())
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23)
+                    .addComponent(labelStrN))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel24)
+                    .addComponent(labelConN))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25)
+                    .addComponent(labelDexN))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel26)
+                    .addComponent(labelItlN))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel27)
+                    .addComponent(labelWisN))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel33)
+                    .addComponent(labelChaN))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder("Perícias"));
+
+        jScrollPane4.setViewportView(listaPericiasNPC);
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -420,14 +612,18 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Arquivo");
@@ -484,6 +680,14 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(menuPersonRemoveJogador);
 
+        menuPersonAddNPC.setText("Inserir NPC");
+        menuPersonAddNPC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuPersonAddNPCActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuPersonAddNPC);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -492,13 +696,13 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -539,6 +743,19 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private void comboBoxJogadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxJogadoresActionPerformed
         refreshView();
     }//GEN-LAST:event_comboBoxJogadoresActionPerformed
+
+    private void menuPersonAddNPCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPersonAddNPCActionPerformed
+        this.setEnabled(false);
+        JanelaCriaNPC janelaCriaNPC = new JanelaCriaNPC(this, false);
+    }//GEN-LAST:event_menuPersonAddNPCActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        //TODO
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void listaNPCValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaNPCValueChanged
+        refreshView();
+    }//GEN-LAST:event_listaNPCValueChanged
 
     /**
      * @param args the command line arguments
@@ -586,7 +803,13 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
@@ -594,6 +817,8 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -601,31 +826,44 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel labelAC;
     private javax.swing.JLabel labelCha;
+    private javax.swing.JLabel labelChaN;
     private javax.swing.JLabel labelClasse;
     private javax.swing.JLabel labelCon;
+    private javax.swing.JLabel labelConN;
     private javax.swing.JLabel labelDP;
     private javax.swing.JTextArea labelDescri;
     private javax.swing.JLabel labelDex;
+    private javax.swing.JLabel labelDexN;
     private javax.swing.JLabel labelHP;
     private javax.swing.JLabel labelHPDices;
     private javax.swing.JLabel labelItl;
+    private javax.swing.JLabel labelItlN;
     private javax.swing.JLabel labelLevel;
     private javax.swing.JLabel labelRaca;
     private javax.swing.JLabel labelStr;
+    private javax.swing.JLabel labelStrN;
     private javax.swing.JLabel labelWis;
-    private javax.swing.JList<String> listaPericias;
+    private javax.swing.JLabel labelWisN;
+    private javax.swing.JList<String> listaNPC;
+    private javax.swing.JList<String> listaPericiasJogador;
+    private javax.swing.JList<String> listaPericiasNPC;
     private javax.swing.JMenuItem menuArquivoCarregarPartida;
     private javax.swing.JMenuItem menuArquivoNovaPartida;
     private javax.swing.JMenuItem menuArquivoSair;
     private javax.swing.JMenuItem menuArquivoSalvarPartida;
     private javax.swing.JMenuItem menuPersonAddJogador;
+    private javax.swing.JMenuItem menuPersonAddNPC;
     private javax.swing.JMenuItem menuPersonRemoveJogador;
     // End of variables declaration//GEN-END:variables
+
 }

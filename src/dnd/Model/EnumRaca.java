@@ -1,0 +1,11 @@
+package dnd.Model;
+
+/**
+ *
+ * @author Murilo
+ */
+public enum EnumRaca {
+    HUMAN, DWARF, ELF, HALFORC,
+    ABERRATION, FIEND, CELESTIAL, CONSTRUCT, CORRUPTOR, DRAGON, ELEMENTAL, FAIRY,
+    GIANT, HUMANOID, SLIME, MONSTRUOSITY, UNDEAD, FLORA
+}

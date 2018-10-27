@@ -17,7 +17,7 @@ public class Jogador extends Personagem{
     public DefaultListModel inventario;
     public Item cabeca, torso, mao1, mao2, botas, acessorio1, acessorio2;
     
-    public Jogador(String INnome, Raca INraca, DefaultListModel INpericias,
+    public Jogador(String INnome, EnumRaca INraca, DefaultListModel INpericias,
             int INstr, int INcon, int INdex, int INitl, int INwis, int INcha,
             String INdescri, String INgenero, EnumClasse INclasse, Align INalign){       //Construtor da classe
         //Faz as atribuições da superclasse:
@@ -171,12 +171,6 @@ public class Jogador extends Personagem{
             hitDices += (getClasse(i).hpDiceSize)*(getClasse(i).level);
         }
         return hitDices + conMod*level;     //HP max = dados de vida por level de classe + (level * mod. de constituição)
-    }
-    
-    @Override
-    public boolean tryAtack(Personagem alvo){
-        //TODO
-        return false;
     }
     
     @Override

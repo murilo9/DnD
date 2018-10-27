@@ -5,7 +5,7 @@ import javax.swing.DefaultListModel;
 public abstract class Personagem {
     public int str, con, dex, itl, wis, cha, hp;
     public String nome;
-    Raca raca;
+    EnumRaca raca;
     public DefaultListModel pericias;   //Mapa de perícias (par perícia-valor), instanciado no construtor
     
     /**
@@ -20,7 +20,7 @@ public abstract class Personagem {
      * @param INwis
      * @param INcha
      */
-    public Personagem(String INnome, Raca INraca,
+    public Personagem(String INnome, EnumRaca INraca,
             int INstr, int INcon, int INdex, int INitl, int INwis, int INcha){    //Construtor da classe
         this.nome = INnome;
         this.raca = INraca;
@@ -62,5 +62,4 @@ public abstract class Personagem {
     
     public abstract int getAC();
     
-    public abstract boolean tryAtack(Personagem alvo);     //Método abstrato a ser implementado pelas sub-classes
 }

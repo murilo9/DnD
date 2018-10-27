@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  * @author Murilo
  */
 public class JanelaCriaJogador extends javax.swing.JDialog {
-    DefaultListModel periciasListModel = new DefaultListModel();
+    DefaultListModel periciasListModel = new DefaultListModel();    //ListModel que será passado ao construtor do jogador
     /**
      * Creates new form JanelaCriaJogador
      */
@@ -434,9 +434,10 @@ public class JanelaCriaJogador extends javax.swing.JDialog {
 
     private void buttonRemovePericiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRemovePericiaActionPerformed
         int periciaIndex = this.inputPericias.getSelectedIndex();   //Pega o índice da perícia selecionada
-        String pericia = this.inputPericias.getSelectedValue();      //Pega a perícia selecionada
-        if(periciaIndex != -1)      //Se houver uma perícia selecionada
-            inputPericias.remove(periciaIndex);     //Remove a perícia da lista
+        if(periciaIndex != -1){      //Se houver uma perícia selecionada
+            periciasListModel.remove(periciaIndex);     //Remove a perícia do ListModel
+            inputPericias.setModel(periciasListModel);     //Atualiza a jList
+        }
     }//GEN-LAST:event_buttonRemovePericiaActionPerformed
 
     /**
