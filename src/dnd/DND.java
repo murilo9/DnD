@@ -6,7 +6,6 @@ import javax.swing.UIManager;
 public class DND {
     public static Partida partida;
     public static JanelaPrincipal janelaPrincipal;
-    
     /**
      * @param args the command line arguments
      */

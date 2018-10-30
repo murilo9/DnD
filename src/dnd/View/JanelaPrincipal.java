@@ -35,7 +35,8 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }
     
     public boolean refreshView(){
-        if(DND.partida.getListaJogadores().getSize() == 0){     //Reseta a View
+        int playerIndex = comboBoxJogadores.getSelectedIndex();
+        if(playerIndex == -1){     //Reseta a View
             labelStr.setText("-----");
             labelCon.setText("-----");
             labelDex.setText("-----");
@@ -47,7 +48,6 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             labelRaca.setText("-----");
             labelLevel.setText("-----");
         }else{      //Exibe os dados do jogador e NPC selecionado
-            int playerIndex = comboBoxJogadores.getSelectedIndex();
             //Atualiza as labels do Jogador:
             labelStr.setText(Controller.getLabel(playerIndex,"str","jogador"));
             labelCon.setText(Controller.getLabel(playerIndex,"con","jogador"));
@@ -67,9 +67,9 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             listaPericiasJogador.setModel(jogador.pericias);
             
         }
-        if(DND.partida.getListaNPCs().getSize() > 0){   //Se houver NPCs instanciados
+        int npcIndex = listaNPC.getSelectedIndex();
+        if(DND.partida.getListaNPCs().getSize() > 0 && npcIndex > -1){   //Se houver NPCs instanciados
             //atualiza as labels do NPC:
-            int npcIndex = listaNPC.getSelectedIndex();
             labelStrN.setText(Controller.getLabel(npcIndex,"str","npc"));
             labelConN.setText(Controller.getLabel(npcIndex,"con","npc"));
             labelDexN.setText(Controller.getLabel(npcIndex,"dex","npc"));
@@ -88,7 +88,6 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             labelChaN.setText("-----");
             listaPericiasNPC.setModel(new DefaultListModel());
         }
-        //TODO: atualiza os dados exibidos por esta janela
         return true;
     }
     
@@ -172,6 +171,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         menuPersonAddJogador = new javax.swing.JMenuItem();
         menuPersonRemoveJogador = new javax.swing.JMenuItem();
         menuPersonAddNPC = new javax.swing.JMenuItem();
+        menuPersonRemoveNPC = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dungeons & Dragons");
@@ -187,10 +187,13 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         jLabel1.setText("HP:");
 
+        labelHP.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         labelHP.setText("-/-");
 
+        labelRaca.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelRaca.setText("--------");
 
+        labelLevel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelLevel.setText("--------");
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Atributos"));
@@ -207,16 +210,22 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         jLabel21.setText("Carisma");
 
+        labelStr.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelStr.setText("------");
 
+        labelCon.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelCon.setText("------");
 
+        labelDex.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelDex.setText("------");
 
+        labelItl.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelItl.setText("------");
 
+        labelWis.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelWis.setText("------");
 
+        labelCha.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelCha.setText("------");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -226,30 +235,21 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelStr))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel21)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelCha))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelCon))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelDex))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelItl))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel20)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                        .addComponent(labelWis)))
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel19)
+                    .addComponent(jLabel20)
+                    .addComponent(jLabel21))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(labelCha, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(labelWis, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                        .addComponent(labelItl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labelDex, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labelCon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labelStr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -311,12 +311,16 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         jLabel5.setText("Classe(s):");
 
+        labelHPDices.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelHPDices.setText("------");
 
+        labelAC.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelAC.setText("------");
 
+        labelDP.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelDP.setText("------");
 
+        labelClasse.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelClasse.setText("------");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -326,22 +330,17 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelHPDices))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelClasse))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelAC))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelDP)))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(labelClasse, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(labelDP, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                        .addComponent(labelAC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labelHPDices, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -490,16 +489,23 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         jLabel33.setText("Carisma");
 
+        labelStrN.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelStrN.setText("------");
+        labelStrN.setName(""); // NOI18N
 
+        labelConN.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelConN.setText("------");
 
+        labelDexN.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelDexN.setText("------");
 
+        labelItlN.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelItlN.setText("------");
 
+        labelWisN.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelWisN.setText("------");
 
+        labelChaN.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelChaN.setText("------");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
@@ -509,30 +515,21 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel23)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelStrN))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel33)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelChaN))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel24)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelConN))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel25)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelDexN))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel26)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelItlN))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel27)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                        .addComponent(labelWisN)))
+                    .addComponent(jLabel23)
+                    .addComponent(jLabel24)
+                    .addComponent(jLabel25)
+                    .addComponent(jLabel26)
+                    .addComponent(jLabel27)
+                    .addComponent(jLabel33))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(labelChaN, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(labelWisN, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                        .addComponent(labelItlN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labelDexN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labelConN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labelStrN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
@@ -688,6 +685,14 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(menuPersonAddNPC);
 
+        menuPersonRemoveNPC.setText("Remover NPC");
+        menuPersonRemoveNPC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuPersonRemoveNPCActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuPersonRemoveNPC);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -745,7 +750,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_comboBoxJogadoresActionPerformed
 
     private void menuPersonAddNPCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPersonAddNPCActionPerformed
-        this.setEnabled(false);
+        //this.setEnabled(false);
         JanelaCriaNPC janelaCriaNPC = new JanelaCriaNPC(this, false);
     }//GEN-LAST:event_menuPersonAddNPCActionPerformed
 
@@ -756,6 +761,17 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private void listaNPCValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaNPCValueChanged
         refreshView();
     }//GEN-LAST:event_listaNPCValueChanged
+
+    private void menuPersonRemoveNPCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPersonRemoveNPCActionPerformed
+        int index = listaNPC.getSelectedIndex();
+        if(index > -1){
+            if(JOptionPane.showConfirmDialog(this, "Deseja mesmo remover o NPC selecionado?") == 0){
+                DND.partida.removeNPC(index);
+                refreshListaNPCs();     //Atualiza a lista de NPCs
+                refreshView();
+            }
+        }
+    }//GEN-LAST:event_menuPersonRemoveNPCActionPerformed
 
     /**
      * @param args the command line arguments
@@ -864,6 +880,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuPersonAddJogador;
     private javax.swing.JMenuItem menuPersonAddNPC;
     private javax.swing.JMenuItem menuPersonRemoveJogador;
+    private javax.swing.JMenuItem menuPersonRemoveNPC;
     // End of variables declaration//GEN-END:variables
 
 }

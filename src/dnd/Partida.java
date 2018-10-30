@@ -26,7 +26,11 @@ public class Partida {
     }
     
     public void removeJogador(int index){
-            jogadores.removeElementAt(index);
+        jogadores.removeElementAt(index);
+    }
+    
+    public void removeNPC(int index){
+        npcs.removeElementAt(index);
     }
     
     public DefaultComboBoxModel getListaJogadores(){
