@@ -172,6 +172,8 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         menuPersonRemoveJogador = new javax.swing.JMenuItem();
         menuPersonAddNPC = new javax.swing.JMenuItem();
         menuPersonRemoveNPC = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        menuAcaoAtaque = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dungeons & Dragons");
@@ -695,6 +697,18 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setText("Ação");
+
+        menuAcaoAtaque.setText("Ataque");
+        menuAcaoAtaque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuAcaoAtaqueActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuAcaoAtaque);
+
+        jMenuBar1.add(jMenu3);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -730,8 +744,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuArquivoSairActionPerformed
 
     private void menuPersonAddJogadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPersonAddJogadorActionPerformed
-        //this.setEnabled(false);
-        JanelaCriaJogador janelaCriaJogador = new JanelaCriaJogador(this, false);
+        JanelaCriaJogador janelaCriaJogador = new JanelaCriaJogador(this, true);
     }//GEN-LAST:event_menuPersonAddJogadorActionPerformed
 
     private void menuPersonRemoveJogadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPersonRemoveJogadorActionPerformed
@@ -750,12 +763,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_comboBoxJogadoresActionPerformed
 
     private void menuPersonAddNPCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPersonAddNPCActionPerformed
-        //this.setEnabled(false);
-        JanelaCriaNPC janelaCriaNPC = new JanelaCriaNPC(this, false);
+        JanelaCriaNPC janelaCriaNPC = new JanelaCriaNPC(this, true);
     }//GEN-LAST:event_menuPersonAddNPCActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        //TODO
+        System.out.println(DND.partida.npcs.get(0).toString());
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void listaNPCValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaNPCValueChanged
@@ -772,6 +784,10 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_menuPersonRemoveNPCActionPerformed
+
+    private void menuAcaoAtaqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAcaoAtaqueActionPerformed
+        JanelaAtaque janelaAtaque = new JanelaAtaque(this, true);
+    }//GEN-LAST:event_menuAcaoAtaqueActionPerformed
 
     /**
      * @param args the command line arguments
@@ -830,6 +846,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
@@ -873,6 +890,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JList<String> listaNPC;
     private javax.swing.JList<String> listaPericiasJogador;
     private javax.swing.JList<String> listaPericiasNPC;
+    private javax.swing.JMenuItem menuAcaoAtaque;
     private javax.swing.JMenuItem menuArquivoCarregarPartida;
     private javax.swing.JMenuItem menuArquivoNovaPartida;
     private javax.swing.JMenuItem menuArquivoSair;

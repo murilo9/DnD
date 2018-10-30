@@ -3,6 +3,7 @@ package dnd.Controller;
 import dnd.Model.EnumRaca;
 import dnd.Model.*;
 import dnd.DND;     //necessária para acessaros membros estáticos da classe principal
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
 public abstract class Controller {
@@ -259,4 +260,44 @@ public abstract class Controller {
         return true;
     }
     
+    /**
+     * Esta função retorna um comboBoxModel com a lista de todos os personagens.
+     * O índice é necessário pois cada comboBox exibindo a lista de personagens
+     * precisa se basear num model diferent, então na verdade ele retorna um 
+     * model que é um índice de um array.
+     * @param index
+     * @return 
+     */
+    public static DefaultComboBoxModel getComboNPCs(int index){
+        DefaultComboBoxModel model1 = new DefaultComboBoxModel();
+        DefaultComboBoxModel model2 = new DefaultComboBoxModel();
+        //Pega a lista de NPCs:
+        int npcSize = DND.partida.npcs.getSize();
+        if(npcSize > 0){
+            for(int i=0;i<npcSize;i++){
+                model1.addElement(DND.partida.npcs.get(i));
+                model2.addElement(DND.partida.npcs.get(i));
+            }
+        }
+        if(index == 0)
+            return model1;
+        else
+            return model2;
+    }
+    
+    public static DefaultComboBoxModel getComboJogadores(int index){
+        DefaultComboBoxModel model1 = new DefaultComboBoxModel();
+        DefaultComboBoxModel model2 = new DefaultComboBoxModel();
+        int jogSize = DND.partida.jogadores.getSize();
+        if(jogSize > 0){
+            for(int i=0;i<jogSize;i++){
+                model1.addElement(DND.partida.jogadores.getElementAt(i));
+                model2.addElement(DND.partida.jogadores.getElementAt(i));
+            }
+        }
+        if(index == 0)
+            return model1;
+        else
+            return model2;
+    }
 }
