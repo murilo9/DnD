@@ -786,7 +786,10 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuPersonRemoveNPCActionPerformed
 
     private void menuAcaoAtaqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAcaoAtaqueActionPerformed
-        JanelaAtaque janelaAtaque = new JanelaAtaque(this, true);
+        JanelaAtaque janelaAtaque;
+        //Verifica se há pelo menos 1 jogador e 1 NPC:
+        if(Controller.getComboJogadores(0) != null && Controller.getComboNPCs(0) != null)
+            janelaAtaque = new JanelaAtaque(this, true);
     }//GEN-LAST:event_menuAcaoAtaqueActionPerformed
 
     /**

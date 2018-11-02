@@ -51,15 +51,23 @@ public abstract class Personagem {
      * @param per
      * @return 
      */
-    public abstract int dieRoll();
-    
+
     public String getRacaString(){
         //TODO
         return "";
     }
     
+    public abstract int dieRollBonus();
+    
     public abstract int getHpMax();
     
     public abstract int getAC();
     
+    public abstract int getHitDices();
+    
+    public abstract int getHitDicesSize();
+    
+    public abstract int getDamageBonus();
+    
+    public abstract void tookDamage(int damage);
 }

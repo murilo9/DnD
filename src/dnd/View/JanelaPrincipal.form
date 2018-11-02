@@ -336,13 +336,11 @@
                                   <EmptySpace pref="13" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="labelCha" pref="41" max="32767" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="labelWis" pref="41" max="32767" attributes="0"/>
-                                          <Component id="labelItl" max="32767" attributes="0"/>
-                                          <Component id="labelDex" max="32767" attributes="0"/>
-                                          <Component id="labelCon" max="32767" attributes="0"/>
-                                          <Component id="labelStr" max="32767" attributes="0"/>
-                                      </Group>
+                                      <Component id="labelWis" pref="41" max="32767" attributes="0"/>
+                                      <Component id="labelItl" max="32767" attributes="0"/>
+                                      <Component id="labelDex" max="32767" attributes="0"/>
+                                      <Component id="labelCon" max="32767" attributes="0"/>
+                                      <Component id="labelStr" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -532,11 +530,9 @@
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="labelClasse" pref="52" max="32767" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="labelDP" pref="52" max="32767" attributes="0"/>
-                                          <Component id="labelAC" max="32767" attributes="0"/>
-                                          <Component id="labelHPDices" max="32767" attributes="0"/>
-                                      </Group>
+                                      <Component id="labelDP" pref="52" max="32767" attributes="0"/>
+                                      <Component id="labelAC" max="32767" attributes="0"/>
+                                      <Component id="labelHPDices" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -759,13 +755,11 @@
                           <EmptySpace pref="38" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="labelChaN" pref="44" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="labelWisN" pref="44" max="32767" attributes="0"/>
-                                  <Component id="labelItlN" max="32767" attributes="0"/>
-                                  <Component id="labelDexN" max="32767" attributes="0"/>
-                                  <Component id="labelConN" max="32767" attributes="0"/>
-                                  <Component id="labelStrN" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="labelWisN" pref="44" max="32767" attributes="0"/>
+                              <Component id="labelItlN" max="32767" attributes="0"/>
+                              <Component id="labelDexN" max="32767" attributes="0"/>
+                              <Component id="labelConN" max="32767" attributes="0"/>
+                              <Component id="labelStrN" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>

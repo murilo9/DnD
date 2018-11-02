@@ -6,7 +6,9 @@
 package dnd.View;
 
 import dnd.Controller.Controller;
+import dnd.DND;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -133,6 +135,11 @@ public class JanelaAtaque extends javax.swing.JDialog {
 
         botaoAtacar.setText("Atacar");
         botaoAtacar.setToolTipText("");
+        botaoAtacar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoAtacarActionPerformed(evt);
+            }
+        });
 
         botaoCancelar.setText("Cancelar");
         botaoCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -293,6 +300,30 @@ public class JanelaAtaque extends javax.swing.JDialog {
         radioVantagem.setSelected(false);
         radioDesvantagem.setSelected(true);
     }//GEN-LAST:event_radioDesvantagemActionPerformed
+
+    private void botaoAtacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAtacarActionPerformed
+        int atacanteIndex, alvoIndex;
+        boolean jogAtac, jogAlvo;
+        if(radioAtacJog.isSelected()){  //Jogador ataca
+            atacanteIndex = comboAtacJog.getSelectedIndex();
+            jogAtac = true;
+        }else{      //NPC ataca
+            atacanteIndex = comboAtacNPC.getSelectedIndex();
+            jogAtac = false;
+        }if(radioAlvoJog.isSelected()){ //Jogador alvo
+            alvoIndex = comboAlvoJog.getSelectedIndex();
+            jogAlvo = true;
+        }else{      //NPC alvo
+            alvoIndex = comboAlvoNPC.getSelectedIndex();
+            jogAlvo = false;
+        }
+        //TODO: Verificar se um personagem (jogador ou NPC) não ataca a si mesmo
+        Controller.atack(atacanteIndex, alvoIndex, jogAtac, jogAlvo);   //Realiza o ataque
+        DND.janelaPrincipal.refreshView();      //Atualiza a janela principal
+        DND.janelaPrincipal.refreshListaNPCs();     //Atualiza o display da lista de NPCs
+        DND.janelaPrincipal.refreshComboBoxJogadores();     //Atualiza o display da lista de jogadores
+        JOptionPane.showMessageDialog(this, Controller.message);    //Exibe a mensagem de resultado
+    }//GEN-LAST:event_botaoAtacarActionPerformed
 
     /**
      * @param args the command line arguments

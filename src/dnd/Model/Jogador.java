@@ -16,6 +16,7 @@ public class Jogador extends Personagem{
     double carga, cargaMax;
     public DefaultListModel inventario;
     public Item cabeca, torso, mao1, mao2, botas, acessorio1, acessorio2;
+    boolean morrendo;
     
     public Jogador(String INnome, EnumRaca INraca, DefaultListModel INpericias,
             int INstr, int INcon, int INdex, int INitl, int INwis, int INcha,
@@ -37,6 +38,7 @@ public class Jogador extends Personagem{
         this.cargaMax = this.str*7.5;
         this.inventario = new DefaultListModel();   //Instancia uma ListModel vazia
         this.hp = getClasse(0).hpDiceSize + Personagem.getMod(this.con);
+        this.morrendo = false;
     }
     
     public boolean equip(){
@@ -50,19 +52,27 @@ public class Jogador extends Personagem{
     }
     
     @Override
-    public int dieRoll(){
+    public int dieRollBonus(){
         //TODO
         return 0;
     }
     
+    @Override
     public int getHitDices(){
         return 1;
         //TODO armas
     }
     
+    @Override
     public int getHitDicesSize(){
         return 2;
         //TODO armas
+    }
+    
+    @Override
+    public int getDamageBonus(){
+        //TODO outros bônus
+        return Personagem.getMod(str);
     }
     
     @Override
@@ -174,8 +184,12 @@ public class Jogador extends Personagem{
     }
     
     @Override
-    public String toString(){
-        return this.nome + " (" + this.hp + "/" + this.getHpMax() + " HP)";
+    public void tookDamage(int damage){
+        hp -= damage;
+        if(hp <= 0){
+            hp = 0;
+            morrendo = true;
+        }
     }
     
     /**
@@ -185,5 +199,13 @@ public class Jogador extends Personagem{
      */
     public Classe getClasse(int index){
         return (Classe)this.classes.get(index);
+    }
+    
+    @Override
+    public String toString(){
+        if(morrendo)
+            return this.nome + " (morrendo)";
+        else
+            return this.nome + " (" + this.hp + "/" + this.getHpMax() + " HP)";
     }
 }

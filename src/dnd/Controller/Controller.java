@@ -3,14 +3,61 @@ package dnd.Controller;
 import dnd.Model.EnumRaca;
 import dnd.Model.*;
 import dnd.DND;     //necessária para acessaros membros estáticos da classe principal
+import java.util.Random;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
 public abstract class Controller {
-    public static String errorMessage;
+    public static String message, errorMessage;
+    static Random random = new Random();
     
-    public void atack(Personagem atacante, Personagem alvo){
-        //TODO
+    public static boolean atack(int atacanteIndex, int alvoIndex, boolean jogAtac, boolean jogAlvo){
+        Personagem atacante, alvo;
+        //Pega os personagens:
+        if(jogAtac)     //Jogador ataca
+            atacante = (Jogador)DND.partida.jogadores.getElementAt(atacanteIndex);
+        else        //NPC ataca
+            atacante = (Npc)DND.partida.npcs.getElementAt(atacanteIndex);
+        if(jogAlvo)     //Jogador alvo
+            alvo = (Jogador)DND.partida.jogadores.getElementAt(alvoIndex);
+        else        //NPC alvo
+            alvo = (Npc)DND.partida.npcs.getElementAt(alvoIndex);
+        //Die roll do atacante:
+        boolean critical = false;
+        int dieRoll = 1 + random.nextInt(19);   //Tira o die roll
+        String dr = Integer.toString(dieRoll);  //Grava o die roll numa string
+        int bonus = atacante.dieRollBonus();
+        if(dieRoll == 20)
+            critical = true;
+        //Verifica falha crítica:
+        if(dieRoll == 1){
+            message = "d20 = 1 + ( " + bonus + ") vs " + alvo.getAC() + ": falha crítica!";
+            return false;
+        }
+        if(critical){
+            //Acerto crítico:
+            int hitDices = atacante.getHitDices();
+            int size = atacante.getHitDicesSize();
+            int damage = hitDices*size + atacante.getDamageBonus();
+            alvo.tookDamage(damage);
+            //TODO joga dado extra pra ver se há dano extra
+            message = "Die roll = 20 + (" + bonus + ") vs " + alvo.getAC()+ 
+                    ": acerto crítico! \n" + damage + " de dano";
+            return true;
+        }else if(dieRoll+atacante.dieRollBonus() > alvo.getAC()){
+            //Acerto comum:
+            int hitDices = atacante.getHitDices();
+            int size = atacante.getHitDicesSize();
+            int damage = hitDices*size + atacante.getDamageBonus();
+            alvo.tookDamage(damage);
+            message = "Die roll = " + dieRoll + " + (" + bonus +") vs " + alvo.getAC() +
+                    ": acerto \n" + damage + " de dano";
+            return true;
+        }else{
+            //Miss
+            message = "Die roll = " + dieRoll + " + (" + bonus + ") vs " + alvo.getAC() + ": falha";
+            return false;
+        }
     }
     
     /**
@@ -80,14 +127,17 @@ public abstract class Controller {
     }
     
     public static boolean tryCriaNPC(String INnome, String INraca, String INhp, 
-            String INac, String INstr, String INcon, String INdex, String INitl, 
+            String INac, String INhitDices, String INhitDicesSize, 
+            String INstr, String INcon, String INdex, String INitl, 
             String INwis, String INcha, DefaultListModel INpericias){
         //Declarando variáveis que serão passadas ao construtor do NPC:
-        int hp, ac, str, con, dex, itl, wis, cha;
+        int hp, ac, hitDices, hitDicesSize, str, con, dex, itl, wis, cha;
         EnumRaca raca;
         try{
             hp = Integer.parseInt(INhp);
             ac = Integer.parseInt(INac);
+            hitDices = Integer.parseInt(INhitDices);
+            hitDicesSize = Integer.parseInt(INhitDicesSize);
             str = Integer.parseInt(INstr);
             con = Integer.parseInt(INcon);
             dex = Integer.parseInt(INdex);
@@ -106,6 +156,10 @@ public abstract class Controller {
         }
         if(INnome.length() < 3){
             errorMessage = "O nome deve ter pelo menos 3 caracteres";
+            return false;
+        }
+        if(hitDices == 0 || hitDicesSize == 0){
+            errorMessage = "O NPC deve ter ao menos 1 dado de ataque.";
             return false;
         }
         //Validação da classe:
@@ -129,7 +183,8 @@ public abstract class Controller {
                 return false;
         }
         //Instancia o NPC:
-        DND.partida.addNPC(new Npc(INnome, raca, INpericias, hp, ac, str, con, dex, itl, wis, cha));
+        DND.partida.addNPC(new Npc(INnome, raca, INpericias, hp, ac, hitDices,
+                hitDicesSize, str, con, dex, itl, wis, cha));
         return true;
     }
     
@@ -261,10 +316,9 @@ public abstract class Controller {
     }
     
     /**
-     * Esta função retorna um comboBoxModel com a lista de todos os personagens.
-     * O índice é necessário pois cada comboBox exibindo a lista de personagens
-     * precisa se basear num model diferent, então na verdade ele retorna um 
-     * model que é um índice de um array.
+     * Esta função retorna um comboBoxModel com a lista de todos os NPCs.
+     * O índice é necessário pois cada comboBox exibindo a lista de NPCs
+     * precisa se basear num model diferente.
      * @param index
      * @return 
      */
@@ -278,13 +332,21 @@ public abstract class Controller {
                 model1.addElement(DND.partida.npcs.get(i));
                 model2.addElement(DND.partida.npcs.get(i));
             }
-        }
+        }else
+            return null;
         if(index == 0)
             return model1;
         else
             return model2;
     }
     
+    /**
+     * Esta função retorna uma ComboBoxModel com a lista de todos os jogadores.
+     * O índice é necessário pois cada comboBox exibindo a lista de NPCs
+     * precisa se basear num model diferente.
+     * @param index
+     * @return 
+     */
     public static DefaultComboBoxModel getComboJogadores(int index){
         DefaultComboBoxModel model1 = new DefaultComboBoxModel();
         DefaultComboBoxModel model2 = new DefaultComboBoxModel();
@@ -294,7 +356,8 @@ public abstract class Controller {
                 model1.addElement(DND.partida.jogadores.getElementAt(i));
                 model2.addElement(DND.partida.jogadores.getElementAt(i));
             }
-        }
+        }else
+            return null;
         if(index == 0)
             return model1;
         else
