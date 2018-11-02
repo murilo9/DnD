@@ -304,6 +304,7 @@ public class JanelaAtaque extends javax.swing.JDialog {
     private void botaoAtacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAtacarActionPerformed
         int atacanteIndex, alvoIndex;
         boolean jogAtac, jogAlvo;
+        String tipo;
         if(radioAtacJog.isSelected()){  //Jogador ataca
             atacanteIndex = comboAtacJog.getSelectedIndex();
             jogAtac = true;
@@ -318,11 +319,19 @@ public class JanelaAtaque extends javax.swing.JDialog {
             jogAlvo = false;
         }
         //TODO: Verificar se um personagem (jogador ou NPC) não ataca a si mesmo
-        Controller.atack(atacanteIndex, alvoIndex, jogAtac, jogAlvo);   //Realiza o ataque
+        //Define o tipo de ataque:
+        if(radioVantagem.isSelected())
+            tipo = "vantagem";
+        else if(radioDesvantagem.isSelected())
+            tipo = "desvantagem";
+        else
+            tipo = "";
+        Controller.atack(atacanteIndex, alvoIndex, jogAtac, jogAlvo, tipo);   //Realiza o ataque
         DND.janelaPrincipal.refreshView();      //Atualiza a janela principal
         DND.janelaPrincipal.refreshListaNPCs();     //Atualiza o display da lista de NPCs
         DND.janelaPrincipal.refreshComboBoxJogadores();     //Atualiza o display da lista de jogadores
         JOptionPane.showMessageDialog(this, Controller.message);    //Exibe a mensagem de resultado
+        this.dispose();
     }//GEN-LAST:event_botaoAtacarActionPerformed
 
     /**

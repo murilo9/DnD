@@ -11,7 +11,7 @@ public abstract class Controller {
     public static String message, errorMessage;
     static Random random = new Random();
     
-    public static boolean atack(int atacanteIndex, int alvoIndex, boolean jogAtac, boolean jogAlvo){
+    public static boolean atack(int atacanteIndex, int alvoIndex, boolean jogAtac, boolean jogAlvo, String tipo){
         Personagem atacante, alvo;
         //Pega os personagens:
         if(jogAtac)     //Jogador ataca
@@ -24,14 +24,33 @@ public abstract class Controller {
             alvo = (Npc)DND.partida.npcs.getElementAt(alvoIndex);
         //Die roll do atacante:
         boolean critical = false;
-        int dieRoll = 1 + random.nextInt(19);   //Tira o die roll
+        boolean vantagem = false;
+        boolean desvantagem = false;
+        String atacName = atacante.nome;
+        String alvoName = alvo.nome;
+        message = atacName + " ataca " + alvoName;
+        int dieRoll = 1 + random.nextInt(19);   //Joga o die roll
+        if(tipo == "vantagem"){
+            vantagem = true;
+            message += " (vantagem)";
+            int dieRoll2 = 1 + random.nextInt(19);
+            if(dieRoll < dieRoll2)  //Se a segunda jogada for maior, utiliza ela
+                dieRoll = dieRoll2;
+        }else if(tipo == "desvantagem"){
+            desvantagem = true;
+            message += " (desvantagem)";
+            int dieRoll2 = 1 + random.nextInt(19);
+            if(dieRoll > dieRoll2)  //Se a segunda jogada for menor, utiliza ela
+                dieRoll = dieRoll2;
+        }
+        message += "\n";
         String dr = Integer.toString(dieRoll);  //Grava o die roll numa string
         int bonus = atacante.dieRollBonus();
         if(dieRoll == 20)
             critical = true;
         //Verifica falha crítica:
         if(dieRoll == 1){
-            message = "d20 = 1 + ( " + bonus + ") vs " + alvo.getAC() + ": falha crítica!";
+            message += "d20 = 1 + ( " + bonus + ") vs " + alvo.getAC() + ": falha crítica!";
             return false;
         }
         if(critical){
@@ -41,7 +60,7 @@ public abstract class Controller {
             int damage = hitDices*size + atacante.getDamageBonus();
             alvo.tookDamage(damage);
             //TODO joga dado extra pra ver se há dano extra
-            message = "Die roll = 20 + (" + bonus + ") vs " + alvo.getAC()+ 
+            message += "Die roll = 20 + (" + bonus + ") vs " + alvo.getAC()+ 
                     ": acerto crítico! \n" + damage + " de dano";
             return true;
         }else if(dieRoll+atacante.dieRollBonus() > alvo.getAC()){
@@ -50,12 +69,12 @@ public abstract class Controller {
             int size = atacante.getHitDicesSize();
             int damage = hitDices*size + atacante.getDamageBonus();
             alvo.tookDamage(damage);
-            message = "Die roll = " + dieRoll + " + (" + bonus +") vs " + alvo.getAC() +
+            message += "Die roll = " + dieRoll + " + (" + bonus +") vs " + alvo.getAC() +
                     ": acerto \n" + damage + " de dano";
             return true;
         }else{
             //Miss
-            message = "Die roll = " + dieRoll + " + (" + bonus + ") vs " + alvo.getAC() + ": falha";
+            message += "Die roll = " + dieRoll + " + (" + bonus + ") vs " + alvo.getAC() + ": falha";
             return false;
         }
     }
