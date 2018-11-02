@@ -12,7 +12,6 @@ public abstract class Personagem {
      * Este construtor não faz tratamento de dados!
      * @param INnome
      * @param INraca
-     * @param INpericias
      * @param INstr
      * @param INcon
      * @param INdex
@@ -45,12 +44,6 @@ public abstract class Personagem {
         //TODO
         return null;
     }
-    
-    /**
-     * Retorna o dano potencial mínimo do personagem
-     * @param per
-     * @return 
-     */
 
     public String getRacaString(){
         //TODO

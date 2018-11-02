@@ -9,8 +9,7 @@ import javax.swing.DefaultListModel;
  */
 public class Jogador extends Personagem{
     public String descricao, genero;
-    public DefaultListModel classes;
-    public DefaultListModel pericias;
+    public DefaultListModel classes, pericias;
     public Align align;
     int level, xp, xpNext;
     double carga, cargaMax;

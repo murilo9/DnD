@@ -6,7 +6,8 @@
 package dnd.Model;
 
 /**
- *
+ * Exibe quais são as classes possíveis. Este enum é passado para uma instância
+ * da classe Classe do objeto jogador.
  * @author Murilo
  */
 public enum EnumClasse {

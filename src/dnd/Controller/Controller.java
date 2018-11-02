@@ -63,7 +63,6 @@ public abstract class Controller {
     /**
      * Retorna a string que possui os dados a serem exibidos na view para o valor indicado
      * @param index
-     * @param playerIndex índice do jogador na DND.partida.jogadores ListModel
      * @param value string indicando a View label cuja string se deseja obter
      * @param tipo
      * @return 

@@ -1,7 +1,7 @@
 package dnd.Model;
 
 /**
- *
+ * Exibe as raças possíveis (as 4 primeiras são humanas, as outras são de NPCs)
  * @author Murilo
  */
 public enum EnumRaca {
