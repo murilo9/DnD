@@ -62,6 +62,15 @@ public class Npc extends Personagem{
     }
     
     @Override
+    public void cura(int valor){
+        this.hp += valor;
+        if(this.hp > this.getHpMax())
+            this.hp = this.getHpMax();
+        if(this.morto)
+            this.morto = false;
+    }
+    
+    @Override
     public String toString(){
         if(morto)
             return this.nome + " (morto)";

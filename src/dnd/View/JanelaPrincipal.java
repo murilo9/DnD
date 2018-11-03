@@ -170,10 +170,14 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         menuPersonAddJogador = new javax.swing.JMenuItem();
         menuPersonRemoveJogador = new javax.swing.JMenuItem();
+        menuPersonCuraJog = new javax.swing.JMenuItem();
         menuPersonAddNPC = new javax.swing.JMenuItem();
         menuPersonRemoveNPC = new javax.swing.JMenuItem();
+        menuPersonCuraNPC = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         menuAcaoAtaque = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dungeons & Dragons");
@@ -246,12 +250,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(labelCha, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(labelWis, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
-                        .addComponent(labelItl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelDex, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelCon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelStr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(labelWis, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                    .addComponent(labelItl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelDex, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelCon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelStr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -339,10 +342,9 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(labelClasse, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(labelDP, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                        .addComponent(labelAC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelHPDices, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(labelDP, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                    .addComponent(labelAC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelHPDices, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -526,12 +528,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(labelChaN, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(labelWisN, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-                        .addComponent(labelItlN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelDexN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelConN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelStrN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(labelWisN, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                    .addComponent(labelItlN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelDexN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelConN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelStrN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
@@ -679,6 +680,14 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(menuPersonRemoveJogador);
 
+        menuPersonCuraJog.setText("Curar Jogador");
+        menuPersonCuraJog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuPersonCuraJogActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuPersonCuraJog);
+
         menuPersonAddNPC.setText("Inserir NPC");
         menuPersonAddNPC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -695,6 +704,14 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(menuPersonRemoveNPC);
 
+        menuPersonCuraNPC.setText("Curar NPC");
+        menuPersonCuraNPC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuPersonCuraNPCActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuPersonCuraNPC);
+
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Ação");
@@ -706,6 +723,12 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu3.add(menuAcaoAtaque);
+
+        jMenuItem1.setText("Teste de Habilidade");
+        jMenu3.add(jMenuItem1);
+
+        jMenuItem2.setText("Teste de Resistência");
+        jMenu3.add(jMenuItem2);
 
         jMenuBar1.add(jMenu3);
 
@@ -792,6 +815,20 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             janelaAtaque = new JanelaAtaque(this, true);
     }//GEN-LAST:event_menuAcaoAtaqueActionPerformed
 
+    private void menuPersonCuraNPCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPersonCuraNPCActionPerformed
+        JanelaCura janelaCura;
+        //Verifica se há pelo menos 1 NPC
+        if(Controller.getComboNPCs(0) != null)
+            janelaCura = new JanelaCura(this, true, false);
+    }//GEN-LAST:event_menuPersonCuraNPCActionPerformed
+
+    private void menuPersonCuraJogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPersonCuraJogActionPerformed
+        JanelaCura janelaCura;
+        //Verifica se há pelo menos 1 jogador
+        if(Controller.getComboJogadores(0) != null)
+            janelaCura = new JanelaCura(this, true, true);
+    }//GEN-LAST:event_menuPersonCuraJogActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -851,6 +888,8 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -900,6 +939,8 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuArquivoSalvarPartida;
     private javax.swing.JMenuItem menuPersonAddJogador;
     private javax.swing.JMenuItem menuPersonAddNPC;
+    private javax.swing.JMenuItem menuPersonCuraJog;
+    private javax.swing.JMenuItem menuPersonCuraNPC;
     private javax.swing.JMenuItem menuPersonRemoveJogador;
     private javax.swing.JMenuItem menuPersonRemoveNPC;
     // End of variables declaration//GEN-END:variables

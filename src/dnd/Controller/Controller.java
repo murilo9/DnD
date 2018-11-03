@@ -11,6 +11,45 @@ public abstract class Controller {
     public static String message, errorMessage;
     static Random random = new Random();
     
+    public static void refreshNpcList(){
+        DND.janelaPrincipal.refreshListaNPCs();
+    }
+    
+    public static void refreshJogList(){
+        DND.janelaPrincipal.refreshComboBoxJogadores();
+    }
+    
+    public static void refreshView(){
+        DND.janelaPrincipal.refreshView();
+    }
+    
+    public static boolean cura(int index, String INvalor, boolean player){
+        //Valida o valor recebido:
+        int valor;
+        try{
+            valor = Integer.parseInt(INvalor);
+        }catch (NumberFormatException e){
+            errorMessage = "Insira um valor válido";
+            return false;
+        }
+        if(valor < 1){
+            errorMessage = "Insira um valor válido";
+            return false;
+        }
+        //Aplica a cura ao personagem indicado:
+        Jogador jogador;
+        Npc npc;
+        if(player){     //Cura jogador
+            jogador = (Jogador)DND.partida.jogadores.getElementAt(index);
+            jogador.cura(valor);
+        }else{      //Cura NPC
+            npc = (Npc)DND.partida.npcs.getElementAt(index);
+            npc.cura(valor);
+        }
+        //Se chegou até aqui, então deu tudo certo
+        return true;
+    }
+    
     public static boolean atack(int atacanteIndex, int alvoIndex, boolean jogAtac, boolean jogAlvo, String tipo){
         Personagem atacante, alvo;
         //Pega os personagens:

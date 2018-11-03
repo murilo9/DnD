@@ -6,7 +6,6 @@
 package dnd.View;
 
 import dnd.Controller.Controller;
-import dnd.DND;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -327,9 +326,9 @@ public class JanelaAtaque extends javax.swing.JDialog {
         else
             tipo = "";
         Controller.atack(atacanteIndex, alvoIndex, jogAtac, jogAlvo, tipo);   //Realiza o ataque
-        DND.janelaPrincipal.refreshView();      //Atualiza a janela principal
-        DND.janelaPrincipal.refreshListaNPCs();     //Atualiza o display da lista de NPCs
-        DND.janelaPrincipal.refreshComboBoxJogadores();     //Atualiza o display da lista de jogadores
+        Controller.refreshJogList();
+        Controller.refreshNpcList();
+        Controller.refreshView();
         JOptionPane.showMessageDialog(this, Controller.message);    //Exibe a mensagem de resultado
         this.dispose();
     }//GEN-LAST:event_botaoAtacarActionPerformed

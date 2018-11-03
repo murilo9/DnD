@@ -5,9 +5,7 @@
         <group>
             <file>file:/C:/rep/DND/src/dnd/View/JanelaPrincipal.java</file>
             <file>file:/C:/rep/DND/src/dnd/Controller/Controller.java</file>
-            <file>file:/C:/rep/DND/src/dnd/Model/Personagem.java</file>
-            <file>file:/C:/rep/DND/src/dnd/Model/Jogador.java</file>
-            <file>file:/C:/rep/DND/src/dnd/View/JanelaAtaque.java</file>
+            <file>file:/C:/rep/DND/src/dnd/View/JanelaCriaJogador.java</file>
         </group>
     </open-files>
 </project-private>

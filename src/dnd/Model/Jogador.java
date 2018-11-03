@@ -207,4 +207,13 @@ public class Jogador extends Personagem{
         else
             return this.nome + " (" + this.hp + "/" + this.getHpMax() + " HP)";
     }
+    
+    @Override
+    public void cura(int valor){
+        this.hp += valor;
+        if(this.hp > this.getHpMax())
+            this.hp = this.getHpMax();
+        if(this.morrendo)
+            this.morrendo = false;
+    }
 }

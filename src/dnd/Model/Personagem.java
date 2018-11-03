@@ -63,4 +63,6 @@ public abstract class Personagem {
     public abstract int getDamageBonus();
     
     public abstract void tookDamage(int damage);
+    
+    public abstract void cura(int valor);
 }
