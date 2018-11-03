@@ -23,6 +23,45 @@ public abstract class Controller {
         DND.janelaPrincipal.refreshView();
     }
     
+    public static boolean diceRoll(String INdices, String INsize, String INbonus, String tipo){
+        //Validação dos dados:
+        int dices, size, bonus;
+        try{
+            dices = Integer.parseInt(INdices);
+            size = Integer.parseInt(INsize);
+            bonus = Integer.parseInt(INbonus);
+        }catch(NumberFormatException e){
+            errorMessage = "Insira valores válidos";
+            return false;
+        }
+        if(dices < 1 || size < 1){
+            errorMessage = "Insira valores válidos";
+            return false;
+        }
+        //Rolagem de dados:
+        int roll = 0;
+        int roll2 = 0;
+        String tipoLabel = "";
+        for(int i = 0; i < dices; i++)
+            roll += 1 + random.nextInt(size-1);
+        if(tipo == "vantagem"){     //Jogada de vantagem
+            tipoLabel = "(vantagem)";
+            for(int i = 0; i < dices; i++)
+                roll2+= 1 + random.nextInt(size-1);
+            if(roll2 > roll)    //Se a segunda jogada for maior, aplica ela
+                roll = roll2;
+        }else if(tipo == "desvantagem"){        //Jogada de desvantagem
+            tipoLabel = "(desvantagem)";
+            for(int i = 0; i < dices; i++)
+                roll2+= 1 + random.nextInt(size-1);
+            if(roll2 < roll)    //Se a segunda jogada for menor, aplica ela
+                roll = roll2;
+        }
+        //Escrevea mensagem que será exibida:
+        message = dices + "d" + size + " + (" + bonus + ") " + tipoLabel + " = " + (roll+bonus);
+        return true;
+    }
+    
     public static boolean cura(int index, String INvalor, boolean player){
         //Valida o valor recebido:
         int valor;

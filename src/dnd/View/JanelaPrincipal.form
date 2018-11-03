@@ -127,6 +127,14 @@
                 <Property name="text" type="java.lang.String" value="Teste de Resist&#xea;ncia"/>
               </Properties>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menuAcaoDiceRoll">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Rolar Dado(s)"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuAcaoDiceRollActionPerformed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
         </Menu>
       </SubComponents>

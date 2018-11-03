@@ -178,6 +178,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         menuAcaoAtaque = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        menuAcaoDiceRoll = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dungeons & Dragons");
@@ -730,6 +731,14 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jMenuItem2.setText("Teste de Resistência");
         jMenu3.add(jMenuItem2);
 
+        menuAcaoDiceRoll.setText("Rolar Dado(s)");
+        menuAcaoDiceRoll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuAcaoDiceRollActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuAcaoDiceRoll);
+
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -828,6 +837,10 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         if(Controller.getComboJogadores(0) != null)
             janelaCura = new JanelaCura(this, true, true);
     }//GEN-LAST:event_menuPersonCuraJogActionPerformed
+
+    private void menuAcaoDiceRollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAcaoDiceRollActionPerformed
+        JanelaDados janelaDados = new JanelaDados(this, true);
+    }//GEN-LAST:event_menuAcaoDiceRollActionPerformed
 
     /**
      * @param args the command line arguments
@@ -933,6 +946,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JList<String> listaPericiasJogador;
     private javax.swing.JList<String> listaPericiasNPC;
     private javax.swing.JMenuItem menuAcaoAtaque;
+    private javax.swing.JMenuItem menuAcaoDiceRoll;
     private javax.swing.JMenuItem menuArquivoCarregarPartida;
     private javax.swing.JMenuItem menuArquivoNovaPartida;
     private javax.swing.JMenuItem menuArquivoSair;
