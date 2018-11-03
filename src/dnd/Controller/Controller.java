@@ -2,7 +2,7 @@ package dnd.Controller;
 
 import dnd.Model.EnumRaca;
 import dnd.Model.*;
-import dnd.DND;     //necessária para acessaros membros estáticos da classe principal
+import dnd.DND;     //necessária para acessar os membros estáticos da classe principal
 import java.util.Random;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -21,6 +21,30 @@ public abstract class Controller {
     
     public static void refreshView(){
         DND.janelaPrincipal.refreshView();
+    }
+    
+    public static boolean dinheiro(int index, String INvalor, boolean remove){
+        //Tratamento do valor:
+        int valor;
+        Jogador jogador = (Jogador)DND.partida.jogadores.getElementAt(index);
+        try{
+            valor = Integer.parseInt(INvalor);
+            if(Integer.signum(valor) == -1)
+                valor = 0 - valor;      //Tira o módulo caso o valor seja negativo
+        }catch(NumberFormatException e){
+            errorMessage = "Insira um valor válido";
+            return false;
+        }
+        if(remove){
+            if(jogador.getDinheiro() < valor){
+                errorMessage = "Este jogador não tem tanto dinheiro";
+                return false;
+            }else
+                jogador.setDinheiro(-valor);
+        }else{
+            jogador.setDinheiro(valor);
+        }
+        return true;
     }
     
     public static boolean diceRoll(String INdices, String INsize, String INbonus, String tipo){
@@ -216,7 +240,8 @@ public abstract class Controller {
                 return jAlvo.getDmgPotString();
             case "classes":
                 return jAlvo.getClassesString();
-            //TODO resto
+            case "dinheiro":
+                return Integer.toString(jAlvo.getDinheiro()) + " $";
             default:
                 return "null..";
         }

@@ -11,7 +11,7 @@ public class Jogador extends Personagem{
     public String descricao, genero;
     public DefaultListModel classes, pericias;
     public Align align;
-    int level, xp, xpNext;
+    int level, xp, xpNext, dinheiro;
     double carga, cargaMax;
     public DefaultListModel inventario;
     public Item cabeca, torso, mao1, mao2, botas, acessorio1, acessorio2;
@@ -35,6 +35,7 @@ public class Jogador extends Personagem{
         this.xpNext = 300;
         this.carga = 0;
         this.cargaMax = this.str*7.5;
+        this.dinheiro = 0;
         this.inventario = new DefaultListModel();   //Instancia uma ListModel vazia
         this.hp = getClasse(0).hpDiceSize + Personagem.getMod(this.con);
         this.morrendo = false;
@@ -48,6 +49,14 @@ public class Jogador extends Personagem{
     public boolean unequip(){
         //TODO
         return false;
+    }
+    
+    public int getDinheiro(){
+        return this.dinheiro;
+    }
+    
+    public void setDinheiro(int valor){
+        this.dinheiro += valor;
     }
     
     @Override

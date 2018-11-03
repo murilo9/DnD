@@ -47,6 +47,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             labelHP.setText("-/-");
             labelRaca.setText("-----");
             labelLevel.setText("-----");
+            labelDinheiro.setText("-----");
         }else{      //Exibe os dados do jogador e NPC selecionado
             //Atualiza as labels do Jogador:
             labelStr.setText(Controller.getLabel(playerIndex,"str","jogador"));
@@ -63,6 +64,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             labelAC.setText(Controller.getLabel(playerIndex, "AC","jogador"));
             labelDP.setText(Controller.getLabel(playerIndex, "dmgPot","jogador"));
             labelClasse.setText(Controller.getLabel(playerIndex, "classes","jogador"));
+            labelDinheiro.setText(Controller.getLabel(playerIndex, "dinheiro", "jogador"));
             Jogador jogador = (Jogador)comboBoxJogadores.getSelectedItem();
             listaPericiasJogador.setModel(jogador.pericias);
             
@@ -136,6 +138,8 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         labelAC = new javax.swing.JLabel();
         labelDP = new javax.swing.JLabel();
         labelClasse = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        labelDinheiro = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
@@ -176,9 +180,8 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         menuPersonCuraNPC = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         menuAcaoAtaque = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
         menuAcaoDiceRoll = new javax.swing.JMenuItem();
+        menuAcaoDinheiro = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dungeons & Dragons");
@@ -329,6 +332,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         labelClasse.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelClasse.setText("------");
 
+        jLabel6.setText("Dinheiro:");
+
+        labelDinheiro.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelDinheiro.setText("------");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -336,16 +344,22 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(labelClasse, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                    .addComponent(labelDP, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                    .addComponent(labelAC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(labelHPDices, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(labelClasse, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                            .addComponent(labelDP, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                            .addComponent(labelAC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelHPDices, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(88, 88, 88)
+                        .addComponent(labelDinheiro, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -367,7 +381,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(labelClasse))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(labelDinheiro))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -725,12 +743,6 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         });
         jMenu3.add(menuAcaoAtaque);
 
-        jMenuItem1.setText("Teste de Habilidade");
-        jMenu3.add(jMenuItem1);
-
-        jMenuItem2.setText("Teste de Resistência");
-        jMenu3.add(jMenuItem2);
-
         menuAcaoDiceRoll.setText("Rolar Dado(s)");
         menuAcaoDiceRoll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -738,6 +750,14 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu3.add(menuAcaoDiceRoll);
+
+        menuAcaoDinheiro.setText("Gerenciar Dinheiro");
+        menuAcaoDinheiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuAcaoDinheiroActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuAcaoDinheiro);
 
         jMenuBar1.add(jMenu3);
 
@@ -842,6 +862,12 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         JanelaDados janelaDados = new JanelaDados(this, true);
     }//GEN-LAST:event_menuAcaoDiceRollActionPerformed
 
+    private void menuAcaoDinheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAcaoDinheiroActionPerformed
+        JanelaDinheiro janelaDinheiro;
+        if(Controller.getComboJogadores(0) != null)
+            janelaDinheiro = new JanelaDinheiro(this, true);
+    }//GEN-LAST:event_menuAcaoDinheiroActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -897,12 +923,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -932,6 +957,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextArea labelDescri;
     private javax.swing.JLabel labelDex;
     private javax.swing.JLabel labelDexN;
+    private javax.swing.JLabel labelDinheiro;
     private javax.swing.JLabel labelHP;
     private javax.swing.JLabel labelHPDices;
     private javax.swing.JLabel labelItl;
@@ -947,6 +973,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JList<String> listaPericiasNPC;
     private javax.swing.JMenuItem menuAcaoAtaque;
     private javax.swing.JMenuItem menuAcaoDiceRoll;
+    private javax.swing.JMenuItem menuAcaoDinheiro;
     private javax.swing.JMenuItem menuArquivoCarregarPartida;
     private javax.swing.JMenuItem menuArquivoNovaPartida;
     private javax.swing.JMenuItem menuArquivoSair;
