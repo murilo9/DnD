@@ -48,6 +48,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             labelRaca.setText("-----");
             labelLevel.setText("-----");
             labelDinheiro.setText("-----");
+            labelXP.setText("-----");
         }else{      //Exibe os dados do jogador e NPC selecionado
             //Atualiza as labels do Jogador:
             labelStr.setText(Controller.getLabel(playerIndex,"str","jogador"));
@@ -65,9 +66,9 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             labelDP.setText(Controller.getLabel(playerIndex, "dmgPot","jogador"));
             labelClasse.setText(Controller.getLabel(playerIndex, "classes","jogador"));
             labelDinheiro.setText(Controller.getLabel(playerIndex, "dinheiro", "jogador"));
+            labelXP.setText(Controller.getLabel(playerIndex, "xp", "jogador"));
             Jogador jogador = (Jogador)comboBoxJogadores.getSelectedItem();
             listaPericiasJogador.setModel(jogador.pericias);
-            
         }
         int npcIndex = listaNPC.getSelectedIndex();
         if(DND.partida.getListaNPCs().getSize() > 0 && npcIndex > -1){   //Se houver NPCs instanciados
@@ -140,6 +141,8 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         labelClasse = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         labelDinheiro = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        labelXP = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
@@ -182,6 +185,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         menuAcaoAtaque = new javax.swing.JMenuItem();
         menuAcaoDiceRoll = new javax.swing.JMenuItem();
         menuAcaoDinheiro = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dungeons & Dragons");
@@ -337,6 +345,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         labelDinheiro.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelDinheiro.setText("------");
 
+        jLabel7.setText("Experiência:");
+
+        labelXP.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelXP.setText("------");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -359,7 +372,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(88, 88, 88)
-                        .addComponent(labelDinheiro, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)))
+                        .addComponent(labelDinheiro, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(72, 72, 72)
+                        .addComponent(labelXP, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -385,7 +402,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(labelDinheiro))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(labelXP))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -445,7 +466,8 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Magias", jPanel5);
 
-        jButton2.setText("Ação");
+        jButton2.setText("Level Up");
+        jButton2.setEnabled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -761,6 +783,20 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
+        jMenu4.setText("Itens");
+
+        jMenuItem1.setText("Adicionar/Remover");
+        jMenu4.add(jMenuItem1);
+
+        jMenuItem2.setText("Abrir Loja");
+        jMenu4.add(jMenuItem2);
+        jMenu4.add(jSeparator3);
+
+        jMenuItem3.setText("Gerenciar Lojas");
+        jMenu4.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu4);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -780,8 +816,9 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuArquivoNovaPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuArquivoNovaPartidaActionPerformed
+        JanelaNovaPartida janelaNovaPartida;
         if(JOptionPane.showConfirmDialog(null, "Deseja abandonar esta partida e iniciar uma nova?") == 0){
-            DND.novaPartida();      //Cria uma nova instância vazia de partida
+            janelaNovaPartida = new JanelaNovaPartida(this, true);
         }
     }//GEN-LAST:event_menuArquivoNovaPartidaActionPerformed
 
@@ -924,10 +961,15 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -946,6 +988,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel labelAC;
     private javax.swing.JLabel labelCha;
@@ -968,6 +1011,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel labelStrN;
     private javax.swing.JLabel labelWis;
     private javax.swing.JLabel labelWisN;
+    private javax.swing.JLabel labelXP;
     private javax.swing.JList<String> listaNPC;
     private javax.swing.JList<String> listaPericiasJogador;
     private javax.swing.JList<String> listaPericiasNPC;

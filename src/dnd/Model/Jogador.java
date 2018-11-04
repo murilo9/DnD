@@ -51,6 +51,19 @@ public class Jogador extends Personagem{
         return false;
     }
     
+    public int getXp(){
+        return this.xp;
+    }
+    
+    public int getXpNext(){
+        return this.xpNext;
+    }
+    
+    public void addXp(int value){
+        this.xp += value;
+        //TODO: level up
+    }
+    
     public int getDinheiro(){
         return this.dinheiro;
     }

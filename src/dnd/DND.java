@@ -18,8 +18,18 @@ public class DND {
         /*OBS: Todos os frames dão um setVisible(true) através do seu próprio contrutor*/
     }
     
+    /**
+     * Cria nova partida em base de dados padrão
+     */
     public static void novaPartida(){
         partida = new Partida();
-        System.out.println("Nova partida iniciada");
+    }
+    
+    /**
+     * Cria nova partida em base de dados personalizada
+     * @param basedados 
+     */
+    public static void novaPartida(Basedados basedados){
+        partida = new Partida(basedados);
     }
 }

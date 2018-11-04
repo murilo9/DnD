@@ -242,6 +242,8 @@ public abstract class Controller {
                 return jAlvo.getClassesString();
             case "dinheiro":
                 return Integer.toString(jAlvo.getDinheiro()) + " $";
+            case "xp":
+                return jAlvo.getXp() + " / " + jAlvo.getXpNext();
             default:
                 return "null..";
         }

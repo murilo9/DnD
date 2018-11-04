@@ -11,10 +11,19 @@ import javax.swing.DefaultListModel;
 public class Partida {
     public DefaultComboBoxModel jogadores;
     public DefaultListModel npcs;
+    public Basedados basedados;
     
     public Partida(){
         jogadores = new DefaultComboBoxModel();
         npcs = new DefaultListModel();
+        basedados = new Basedados();    //Instancia uma nova base de dados
+        BdDefaultInstancer.createDefaultDB();   //Cria base de dados default
+    }
+    
+    public Partida(Basedados INbasedados){
+        jogadores = new DefaultComboBoxModel();
+        npcs = new DefaultListModel();
+        basedados = INbasedados;    //Atribui a base de dados personalziada à partida
     }
     
     public void addJogador(Jogador jogador){
