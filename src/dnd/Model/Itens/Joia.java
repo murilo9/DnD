@@ -8,4 +8,8 @@ import dnd.Model.Itens.Item;
  */
 public class Joia extends Item{
     
+    public Joia(String INnome, String INdescricao, double INpeso, int INqtd,
+                int INvalor, boolean INequipavel){
+        super(INnome, INdescricao, INpeso, INqtd, INvalor, INequipavel);
+    }
 }

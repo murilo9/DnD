@@ -12,11 +12,19 @@ public class Basedados {
         npcList = new DefaultListModel();
     }
     
-    public void insertItem(Item item){
+    public void addItem(Item item){
         //TODO
     }
     
-    public void insertNPC(Npc npc){
+    public void addNPC(Npc npc){
         //TODO
+    }
+    
+    public void removeItem(int index){
+        itemList.remove(index);
+    }
+    
+    public void removeNPC(int index){
+        itemList.remove(index);
     }
 }

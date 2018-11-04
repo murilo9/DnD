@@ -15,4 +15,12 @@ public class Arma extends Item{
     public EquipTipo tipo;
     public int hitDices, hitDicesSize;
     
+    public Arma(String INnome, String INdescricao, double INpeso, int INqtd,
+                int INvalor, boolean INequipavel, EquipTipo INtipo,
+                int INhitDices, int INhitDicesSize){
+        super (INnome, INdescricao, INpeso, INqtd, INvalor, INequipavel);   //Chama construtor da superclasse
+        this.tipo = INtipo;
+        this.hitDices = INhitDices;
+        this.hitDicesSize = INhitDicesSize;
+    }
 }
