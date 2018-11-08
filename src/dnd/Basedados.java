@@ -13,11 +13,11 @@ public class Basedados {
     }
     
     public void addItem(Item item){
-        //TODO
+        itemList.addElement(item);
     }
     
     public void addNPC(Npc npc){
-        //TODO
+        itemList.addElement(npc);
     }
     
     public void removeItem(int index){

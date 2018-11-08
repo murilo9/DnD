@@ -40,8 +40,8 @@ public class Item {
     @Override
     public String toString(){
         if(this.qtd > 1)
-            return this.nome;
-        else
             return this.nome + "(x" + this.qtd + ")";
+        else
+            return this.nome;
     }
 }

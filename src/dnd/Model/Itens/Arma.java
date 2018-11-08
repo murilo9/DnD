@@ -5,8 +5,6 @@
  */
 package dnd.Model.Itens;
 
-import dnd.Model.Itens.Item;
-
 /**
  *
  * @author Murilo

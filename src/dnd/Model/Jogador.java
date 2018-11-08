@@ -9,7 +9,7 @@ import javax.swing.DefaultListModel;
  */
 public class Jogador extends Personagem{
     public String descricao, genero;
-    public DefaultListModel classes, pericias;
+    public DefaultListModel classes, pericias, itens;
     public Align align;
     int level, xp, xpNext, dinheiro;
     double carga, cargaMax;
@@ -39,6 +39,22 @@ public class Jogador extends Personagem{
         this.inventario = new DefaultListModel();   //Instancia uma ListModel vazia
         this.hp = getClasse(0).hpDiceSize + Personagem.getMod(this.con);
         this.morrendo = false;
+    }
+    
+    public boolean addItem(Item item){
+        if(inventario.contains(item)){      //Se já houver o item na lista, aumenta a qtd:
+            int index = inventario.indexOf(item);
+            Item gettedItem = (Item)inventario.get(index);
+            gettedItem.setQtd(1);
+        }else       //Se não houver o item na lista, adiciona
+            inventario.addElement(item);
+        return true;
+    }
+    
+    public String getCargaString(){
+        String sCarga = Double.toString(carga);
+        String sCargaMax = Double.toString(cargaMax);
+        return sCarga + "/" + sCargaMax + " kg";
     }
     
     public boolean equip(){
@@ -224,10 +240,17 @@ public class Jogador extends Personagem{
     
     @Override
     public String toString(){
-        if(morrendo)
-            return this.nome + " (morrendo)";
+        String rNome = this.nome;
+        //Adiciona valor de HP ou status de morte:
+        if(this.hp > 0)
+            rNome += " (" + this.hp + "/" + this.getHpMax() + " HP)";
         else
-            return this.nome + " (" + this.hp + "/" + this.getHpMax() + " HP)";
+            rNome += "(morrendo)";
+        //Adiciona status se sobrepeso:
+        if(this.carga > this.cargaMax)
+            rNome += "(sobrecarga)";
+        //Retorna a string final:
+        return rNome;
     }
     
     @Override

@@ -17,7 +17,6 @@ public class Partida {
         jogadores = new DefaultComboBoxModel();
         npcs = new DefaultListModel();
         basedados = new Basedados();    //Instancia uma nova base de dados
-        BdDefaultInstancer.createDefaultDB();   //Cria base de dados default
     }
     
     public Partida(Basedados INbasedados){

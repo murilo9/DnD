@@ -23,6 +23,7 @@ public class DND {
      */
     public static void novaPartida(){
         partida = new Partida();
+        BdDefaultInstancer.createDefaultDB();   //Cria base de dados default
     }
     
     /**

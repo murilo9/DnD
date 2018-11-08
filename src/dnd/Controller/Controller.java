@@ -2,6 +2,7 @@ package dnd.Controller;
 
 import dnd.Model.EnumRaca;
 import dnd.Model.*;
+import dnd.Model.Itens.*;
 import dnd.DND;     //necessária para acessar os membros estáticos da classe principal
 import java.util.Random;
 import javax.swing.DefaultComboBoxModel;
@@ -23,6 +24,78 @@ public abstract class Controller {
         DND.janelaPrincipal.refreshView();
     }
     
+    /**
+     * Remove o item do inventario do jogador
+     * @param playerIndex índice do jogador
+     * @param itemIndex índice do item no inventario do jogador
+     */
+    public static void removeItem(int playerIndex, int itemIndex){
+        Jogador jogador = (Jogador)DND.partida.jogadores.getElementAt(playerIndex);
+        jogador.inventario.remove(itemIndex);
+        //TODO remover quantidade do item
+    }
+    
+    /**
+     * Retorna a string com a descrição do item do inventário do jogador
+     * @param playerIndex índice do jogador na lista de jogadores
+     * @param itemIndex índice do item na lista de inventário do jogador
+     * @return 
+     */
+    public static String getJogadorItemDescri(int playerIndex, int itemIndex){
+        Jogador jogador = (Jogador)DND.partida.jogadores.getElementAt(playerIndex);
+        Item item = (Item)jogador.inventario.get(itemIndex);
+        return item.descricao;
+    }
+    
+    /**
+     * Retorna o ListModel da lista de itens do jogador especificado no index
+     * @param index
+     * @return 
+     */
+    public static DefaultListModel getInventario(int index){
+        Jogador jogador = (Jogador)DND.partida.jogadores.getElementAt(index);
+        return jogador.inventario;
+    }
+    
+    /**
+     * Retorna a ListModel da lista de itens da base de dados da partida
+     * @return 
+     */
+    public static DefaultListModel getListaItens(){
+        return DND.partida.basedados.itemList;
+    }
+    
+    /**
+     * Tenta dar o item especificado ao jogador.
+     * @param playerIndex
+     * @param itemIndex
+     * @param loja se for pro jogador comprar o item (verifica e diminui o dinheiro)
+     * @return 
+     */
+    public static boolean giveItem(int playerIndex, int itemIndex, boolean loja){
+        Jogador jogador = (Jogador)DND.partida.jogadores.getElementAt(playerIndex);
+        Item item = (Item)DND.partida.basedados.itemList.get(itemIndex);
+        if(loja){       //Se for loja
+            if(jogador.getDinheiro() >= item.valor){     //Verifica se o jogador possui dinheiro
+                jogador.setDinheiro(-item.valor);   //Subtrai o dinheiro
+                jogador.addItem(item);      //Adiciona o item
+            }else{       //Se não tiver dinheiro
+                errorMessage = "Este jogador não tem dinheiro suficiente.";
+                return false;
+            }
+        }else      //Se não for loja
+            jogador.addItem(item);      //Apenas adiciona o item
+        //Se chegou até aqui, sucesso
+        return true;
+    }
+    
+    /**
+     * Seta o valor do dinheiro do jogador especificado no index.
+     * @param index index da combobox de jogadores
+     * @param INvalor string que vem direto da input da View
+     * @param remove se é pra deimuir o dinheiro
+     * @return 
+     */
     public static boolean dinheiro(int index, String INvalor, boolean remove){
         //Tratamento do valor:
         int valor;
